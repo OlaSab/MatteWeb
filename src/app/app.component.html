@@ -1,3 +1,32 @@
-<h1>
-  {{title}}
-</h1>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><span style="color: darkblue; margin-left:10px;" class="glyphicon glyphicon-th"></span><span style="color: darkblue; margin-left:10px;"><b>MatteWeb</b></span></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li style="margin-top: 10px;" class="active">
+          <button type="button" class="btn btn-primary" (click)="setShowMultiplication()">Multiplikation</button>
+          <button type="button" class="btn btn-primary" (click)="setShowAddition()">Addition</button>
+          <button type="button" class="btn btn-primary" (click)="setShowSubtraction()">Subtraktion</button>
+          <button type="button" class="btn btn-primary" (click)="setShowDivision()">Division</button>
+      </ul>
+          <button style="margin-top: 10px; float: right;" type="button" class="btn btn-primary" title="Settings"><span class="glyphicon glyphicon-cog"></span></button>
+      
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div [hidden]=!showMultiplication()><multiAddSub [calculationMode]="'Multiplication'"></multiAddSub></div>
+<div [hidden]=!showAddition()><multiAddSub [calculationMode]="'Addition'"></multiAddSub></div>
+<div [hidden]=!showSubtraction()><multiAddSub [calculationMode]="'Subtraction'"></multiAddSub></div>
+<div [hidden]=!showDivision()><multiAddSub [calculationMode]="'Division'"></multiAddSub></div>
+<div><settings></settings></div>
