@@ -1,11 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'multiAddSub',
-  templateUrl: './multiAddSub.template.html',
-  styleUrls: ['./multiAddSub.component.css']
+  templateUrl: './multiAddSub.template.html'
 })
-export class MultiAddSubComponent {
+export class MultiAddSubComponent implements OnInit {
+  @Input() calculationMode: string;
+
   title: string;
   factor1: number;
   factor2: number;
@@ -15,10 +16,11 @@ export class MultiAddSubComponent {
   numberOfIncorrectAnswers: number;
   symbol: string;
 
-  @Input() calculationMode: string = "Multiplication";
+  
 
   ngOnInit()
   {
+    console.log( "calcmode: " + this.calculationMode);
     this.title = this.calculationMode;
     switch (this.calculationMode)
     {
@@ -33,12 +35,13 @@ export class MultiAddSubComponent {
       case 'Subtraction':
         this.title = "Subtraktion";
         this.symbol = "-";
-        break;    
+        break;
       case 'Division':
         this.title = "Division";
         this.symbol = "/";
-        break;              
+        break;
     }
+
 
     this.resetCalculation();
   }
@@ -57,13 +60,13 @@ export class MultiAddSubComponent {
   {
 
     var excludes: number[] = [];
-    
+
     var min: number = 1;
     var max: number;
 
     switch (this.calculationMode)
     {
- 
+
       case 'Multiplication':
         max = 10;
         break;
@@ -72,11 +75,11 @@ export class MultiAddSubComponent {
         break;
       case 'Subtraction':
         max = 100;
-        break;   
+        break;
       case 'Division':
         let exludes = [1, 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97];
         max = 40;
-        break;               
+        break;
     }
 
     this.factor1 = this.getRandomInt(min, max);
@@ -84,7 +87,7 @@ export class MultiAddSubComponent {
     {
       this.factor1 = this.getRandomInt(min, max);
     }
-    
+
     if (this.calculationMode == 'Subtraction' || this.calculationMode == 'Division')
     {
       max = this.factor1;
@@ -95,7 +98,7 @@ export class MultiAddSubComponent {
     while (this.calculationMode == 'Division' && this.factor1%this.factor2!=0)
     {
         this.factor2 = this.getRandomInt(min, max);
-    }    
+    }
   }
 
   validateAnswer()
@@ -104,7 +107,7 @@ export class MultiAddSubComponent {
 
     switch (this.calculationMode)
     {
-      
+
       case 'Multiplication':
         sum = this.factor1 * this.factor2;
         break;
@@ -115,8 +118,8 @@ export class MultiAddSubComponent {
         sum = this.factor1 - this.factor2;
         break;
       case 'Division':
-        sum = this.factor1 / this.factor2;        
-        break;        
+        sum = this.factor1 / this.factor2;
+        break;
     }
 
     if (sum == this.answer)
@@ -139,12 +142,12 @@ export class MultiAddSubComponent {
   getBorderStyle() {
     if (this.wrongAnswer)
     {
-      return "red";  
+      return "red";
     }
-    else 
+    else
     {
       return "black";
     }
 
-  }    
+  }
 }
